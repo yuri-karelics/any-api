@@ -1,0 +1,13 @@
+services:
+  any-api:
+    build: .
+    container_name: any-api
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      POST_ENDPOINT_NAME: "ingest"
+      LOG_DIR: "/app/logs"
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
