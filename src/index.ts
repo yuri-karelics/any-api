@@ -38,6 +38,17 @@ async function appendLogLine(req: Request): Promise<string> {
   const logFilePath = path.join(logDir, getLogFileName());
   const logRecord = {
     timestamp: new Date().toISOString(),
+    sender: {
+      ip: req.ip,
+      ips: req.ips,
+      hostname: req.hostname,
+      protocol: req.protocol,
+      method: req.method,
+      originalUrl: req.originalUrl,
+      remoteAddress: req.socket.remoteAddress,
+      userAgent: req.get("user-agent")
+    },
+    headers: req.headers,
     body: normalizeBody(req.body)
   };
 
